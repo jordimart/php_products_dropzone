@@ -10,6 +10,27 @@ echo "<br>";
 echo "<br>";
 include 'modules/products/utils/functions_products.inc.php';
 
+
+if ((isset($_POST['alta_users_json']))) {
+  
+  alta_users();
+}
+
+	function alta_users() {
+
+
+        $jsondata["success"] = true;
+        $jsondata["redirect1"] = "hola mundo";
+				$jsondata["redirect2"] = $_POST['alta_users_json'];
+				$jsondata["redirect3"] = $_POST['alta_users_json'];
+
+        echo json_encode($jsondata);
+        exit;
+
+}
+
+
+
 if ($_POST) {
     $result = validate_products();
 

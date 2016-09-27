@@ -178,7 +178,9 @@ $(document)
 
     $("#submit_products")
       .click(function() {
+        var result = true;
         $(".error").remove();
+
         if ($("#serial_number").val() == "" ||
           $("#serial_number").val() == "Input serial number") {
           $("#serial_number")
@@ -319,49 +321,33 @@ $(document)
             );
           return false;
         }
+        console.log("Antes de submit");
+        //$("#form_products").submit();
+        //$("#form_products").val("action", "index.php?module=products");
 
-        $("#form_products").submit();
-        $("#form_products").val("action", "index.php?module=products");
+        if (result) {
+          var data = {
+            "serial_number": "jorge"
+          };
 
-      });
+          var data_users_JSON = JSON.stringify(data);
 
-    // realizamos funciones para que sea más práctico nuestro formulario
-    $("#seral_number, #provider")
-      .keyup(function() {
-        if ($(this).val() != "" && string_reg.test($(this).val())) {
-          $(".error").fadeOut();
-          return false;
-        }
-      });
+          $.post(
+              'modules/products/controller/controller_products.class.php', {
+                alta_users_json: data_users_JSON
+              },
+              function(response) {
+                console.log(response);
+                console.log(response.redirect3.serial_number);
 
-    $("#date_entry", "#date_exit")
-      .keyup(function() {
-        if ($(this).val() != "" && date_reg.test($(this).val())) {
-          $(".error").fadeOut();
-          return false;
-        }
-      });
+              },
+              "json")
+            .fail(function(xhr) {
+              console.log(xhr.responseJSON);
 
-    $("#purchase_price", "#sale_price")
-      .keyup(function() {
-        if ($(this).val() != "" && price_reg.test($(this).val())) {
-          $(".error").fadeOut();
-          return false;
+            });
         }
-      });
-    $("#weight", "#height", "#width")
-      .keyup(function() {
-        if ($(this).val() != "" && measure_reg.test($(this).val())) {
-          $(".error").fadeOut();
-          return false;
-        }
-      });
-    $("#description")
-      .keyup(function() {
-        if ($(this).val() != "" && desc_reg.test($(this).val())) {
-          $(".error").fadeOut();
-          return false;
-        }
+
       });
 
   });

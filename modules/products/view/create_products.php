@@ -1,8 +1,9 @@
 <script type="text/javascript" src="modules/products/view/js/validate.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="contact_form wow fadeInLeft">
-            <form class="submitphoto_form" id="form_products" method="post">
+            <form class="center" id="form_products" name="form_products">
 
                 <fieldset>
                     <!-- Form Name -->
