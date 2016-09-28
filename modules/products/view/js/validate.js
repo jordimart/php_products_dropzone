@@ -178,7 +178,7 @@ $(document)
 
     $("#submit_products")
       .click(function() {
-        var result = true;
+
         $(".error").remove();
 
         if ($("#serial_number").val() == "" ||
@@ -324,10 +324,10 @@ $(document)
         console.log("Antes de submit");
         //$("#form_products").submit();
         //$("#form_products").val("action", "index.php?module=products");
-
+        var result = true;
         if (result) {
           var data = {
-            "serial_number": "jorge"
+            "name": "jorge"
           };
 
           var data_users_JSON = JSON.stringify(data);
@@ -338,7 +338,7 @@ $(document)
               },
               function(response) {
                 console.log(response);
-                console.log(response.redirect3.serial_number);
+                console.log(response.redirect3.name);
 
               },
               "json")

@@ -1,18 +1,11 @@
 <?php
 
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
+
 include 'modules/products/utils/functions_products.inc.php';
 
 
 if ((isset($_POST['alta_users_json']))) {
-  
+console.log("dentro de la funcion");
   alta_users();
 }
 
@@ -25,7 +18,7 @@ if ((isset($_POST['alta_users_json']))) {
 				$jsondata["redirect3"] = $_POST['alta_users_json'];
 
         echo json_encode($jsondata);
-        exit;
+        exit();
 
 }
 
