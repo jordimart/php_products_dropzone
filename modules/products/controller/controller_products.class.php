@@ -66,3 +66,12 @@ if ($_POST) {
     }
 }
 include 'modules/products/view/create_products.php';
+
+if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
+
+    
+}
+
+if (isset($_GET["delete"]) && $_GET["delete"] == true) {
+
+}

@@ -223,16 +223,16 @@ $(document)
               this.on("success", function(file, response) {
                 console.log("estoy en upload");
                 // alert(response);
-                $("#progress").show();
-                $("#bar").width('100%');
-                $("#percent").html('100%');
-                $('.msg').text('').removeClass('msg_error');
-                $('.msg')
-                  .text('Success Upload image!!')
-                  .addClass('msg_ok')
-                  .animate({
-                    'right': '300px'
-                  }, 300);
+                /*  $("#progress").show();
+                  $("#bar").width('100%');
+                  $("#percent").html('100%');
+                  $('.msg').text('').removeClass('msg_error');
+                  $('.msg')
+                    .text('Success Upload image!!')
+                    .addClass('msg_ok')
+                    .animate({
+                      'right': '300px'
+                    }, 300);*/
               });
             },
             complete: function(file) {
@@ -252,7 +252,7 @@ $(document)
                 data: "filename=" + name,
                 success: function(data) {
                   console.log("estoy en delete");
-                  $("#progress").hide();
+                  /*$("#progress").hide();
                   $('.msg').text('').removeClass('msg_ok');
                   $('.msg').text('').removeClass('msg_error');
                   $("#e_avatar").html("");
@@ -273,7 +273,7 @@ $(document)
                     } else {
                       false;
                     }
-                  }
+                  }*/
                 }
               });
             }
