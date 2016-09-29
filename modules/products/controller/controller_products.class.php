@@ -1,11 +1,19 @@
 <?php
 
+include ($_SERVER['DOCUMENT_ROOT'] . "/php_products/modules/users/utils/functions_products.inc.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/php_products/utils/upload.php");
 
-include 'modules/products/utils/functions_products.inc.php';
+//include 'modules/products/utils/functions_products.inc.php';
 
+if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
+
+    $result_avatar = upload_files();
+    $_SESSION['result_avatar'] = $result_avatar;
+    //echo debug($_SESSION['result_avatar']); //se mostraría en alert(response); de dropzone.js
+}
 
 if ((isset($_POST['alta_users_json']))) {
-console.log("dentro de la funcion");
+
   alta_users();
 }
 
@@ -13,7 +21,7 @@ console.log("dentro de la funcion");
 
 
         $jsondata["success"] = true;
-        $jsondata["redirect1"] = "hola mundo";
+        $jsondata["redirect1"] = "prova alta users";
 				$jsondata["redirect2"] = $_POST['alta_users_json'];
 				$jsondata["redirect3"] = $_POST['alta_users_json'];
 

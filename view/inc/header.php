@@ -7,7 +7,9 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sp Solar-spain : home</title>
+    <title>Solar-spain |
+        <?php if($_GET['module']){ echo $_GET['module'];}else{ echo "home";} ?>
+    </title>
 
     <!-- Mobile Specific Metas
     ================================================== -->
@@ -47,31 +49,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
 
     <script>
-        //configuracion datepicker
-        $(function() {
-            $('#date_entry').datepicker({
-                dateFormat: 'dd-mm-yy',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '1900:2016',
+      $(function() {
+        $( "#date_entry" ).datepicker();
+        $( "#date_exit" ).datepicker();
+      });
 
-
-            });
-        });
-    </script>
-
-    <script>
-        //configuracion datepicker
-        $(function() {
-            $('#date_exit').datepicker({
-                dateFormat: 'dd-mm-yy',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '1900:2016',
-
-
-            });
-        });
     </script>
 
 </head>
