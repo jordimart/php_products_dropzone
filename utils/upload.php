@@ -1,7 +1,7 @@
 <?php
 
-echo json_encode("estoy en upload");
-exit();
+//echo json_encode("estoy en upload");
+//exit();
 
 //function upload_files() {
 

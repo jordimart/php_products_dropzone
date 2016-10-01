@@ -163,21 +163,21 @@
                     </div>
                     <div id="e_warranty"></div>
                     <br>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                    <br >
+                    <br >
+                    <br >
+                    <br >
                     <div class="form-group" id="progress">
                         <div id="bar"></div>
                         <div id="percent">0%</div>
                     </div>
 
                     <div class="msg"></div>
-                    <br/>
+                    <br>
                     <div id="dropzone" class="dropzone"></div><br/>
-                    <br/>
-                    <br/>
-                    <br/>
+                    <br>
+                    <br>
+                    <br>
                     <!-- Button (Double) -->
                     <div class="form-group">
 
