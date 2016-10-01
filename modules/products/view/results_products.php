@@ -1,26 +1,15 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br><br><br>
+<section >
+    <div >
+        <div class="center">
+            <h2>ADD PRODUCT</h2>
+            <p class="lead">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div >
+            <div class="status alert alert-success" style="display: none"></div>
+            <div id="content"></div>
+            <script type="text/javascript" src="modules/products/view/js/list_products.js" ></script>
 
-
-<?php
-$product = $_SESSION['products'];
-$msage = $_SESSION['msje'];
-
-foreach ($product as $index => $valor) {
-    if ($index == 'warranty') {
-        echo "<br><b>warranty:</b><br>";
-        $warranty = $product['warranty'];
-        foreach ($warranty as $index => $valor) {
-            echo "<b>---> $index</b>: $valor<br>";
-        }
-    } else {
-        echo "<br><b>$index</b>: $valor";
-   }
-}
-echo "<br>" . "<b style='color:green'>" . $msage;
-?>
+        </div><!--/.row-->
+    </div><!--/.container-->
+</section><!--/#contact-page-->

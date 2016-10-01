@@ -1,11 +1,17 @@
 <?php
 
-//echo json_encode("estoy en upload");
-//exit();
+function upload_files() {
+  $jsondata["success"] = true;
+  $jsondata["redirect2"] = "hola he comunicado con upload";
+  echo json_encode($jsondata);
+  exit;
 
-//function upload_files() {
 
-//}
+}
 
-//function remove_files(){
-//}
+function remove_files(){
+  $jsondata["success"] = true;
+  $jsondata["redirect3"] = "hola he comunicado con delete";
+  echo json_encode($jsondata);
+  exit;
+  }

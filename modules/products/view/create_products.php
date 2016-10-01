@@ -10,6 +10,9 @@
     <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="contact_form wow fadeInLeft">
             <form class="center" id="form_products" name="form_products">
+              <div class ="form-group">
+                    <input type="hidden" name="alta_products" value="alta_products">
+                </div>
                 <br><br><br><br><br><br>
                 <fieldset>
                     <!-- Form Name -->

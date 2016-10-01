@@ -3,7 +3,7 @@
 /* This function first use filters to all data,after if data is not ok pass string error and value false */
 /* Function return array of arrays of result(boleans),error(message),data(results of regular expresion) */
 
-function validate_products() {
+function validate_products($value) {
     $error = array();
     $ok = true;
 
@@ -13,7 +13,7 @@ function validate_products() {
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/^[0-9a-zA-Z]{2,20}$/')
         ),
-        'date_entry' => array(
+        /*'date_entry' => array(
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d/')
         ),
@@ -48,21 +48,21 @@ function validate_products() {
         'description' => array(
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/^[a-zA-Z0-9- ]+$/i')
-        ),
+        ),*/
     );
 
 
-    $result = filter_input_array(INPUT_POST, $filter);
+    $result = filter_input_array($value, $filter);
 
     //error message for seral number
     if ($result != null && $result) {
 
         if (!$result['serial_number']) {
-            $error['serial_number'] = 'Serial number must be 2 to 20 characters,no admit special characters';
+            $error['serial_number'] = 'Serial number must be 2 to 20 characters,no admit special characters php';
             $ok = false;
         }
 
-        //no filter
+      /*  //no filter
         $result['category'] = $_POST['category'];
         $result['trademark'] = $_POST['trademark'];
         $result['model'] = $_POST['model'];
@@ -166,7 +166,7 @@ function validate_products() {
                 $error['description'] = "The field is empty";
                 $ok = false;
             }
-        }
+        }*/
     };
     return $return = array('result' => $ok, 'error' => $error, 'data' => $result);
 }
