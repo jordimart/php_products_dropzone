@@ -43,11 +43,53 @@ $(document)
 
     // Control de seguridad para evitar que al volver atrás de la
     // pantalla results a create, no nos imprima los datos
-    $.get(
-      "modules/products/controller/controller_products.class.php?load_data=true", // cogemos por get
+    /*$.get(
+      "modules/products/controller/controller_products.class.php?load_data=true",
+      // cogemos por get
       function(response) {
         console.log(response);
-      }, "json");
+      }, "json");*/
+
+    /*  // Dropzone function //////////////////////////////////
+      $("#dropzone")
+        .dropzone({
+          url:
+      "modules/products/controller/controller_products.class.php?upload=true",
+          addRemoveLinks: true,
+          maxFileSize: 1000,
+          dictResponseError: "Ha ocurrido un error en el server",
+          acceptedFiles:
+      'image/*,.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF,.rar,application/pdf,.psd',
+          init: function() {
+            this.on("success", function(file, response) {
+              console.log(response);
+
+            });
+          },
+          complete: function(file) {
+            // if(file.status == "success"){
+            // alert("El archivo se ha subido correctamente: " +
+            // file.name);
+            //}
+          },
+          error: function(file) {
+            // alert("Error subiendo el archivo " + file.name);
+          },
+          removedfile: function(file, serverFileName) {
+            var name = file.name;
+            $.ajax({
+              type: "POST",
+              url:
+      "modules/products/controller/controller_products.class.php?delete=true",
+              data: "filename=" + name,
+              success: function(data) {
+                console.log(data);
+
+              }
+            });
+          }
+
+        });*/
 
     // Dropzone function //////////////////////////////////
     $("#dropzone")
@@ -59,14 +101,22 @@ $(document)
         acceptedFiles: 'image/*,.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF,.rar,application/pdf,.psd',
         init: function() {
           this.on("success", function(file, response) {
-            console.log(response);
 
+            $("#progress").show();
+            $("#bar").width('100%');
+            $("#percent").html('100%');
+            $('.msg').text('').removeClass('msg_error');
+            $('.msg')
+              .text('Success Upload image!!')
+              .addClass('msg_ok')
+              .animate({
+                'right': '300px'
+              }, 300);
           });
         },
         complete: function(file) {
           // if(file.status == "success"){
-          // alert("El archivo se ha subido correctamente: " +
-          // file.name);
+          // alert("El archivo se ha subido correctamente: " + file.name);
           //}
         },
         error: function(file) {
@@ -79,12 +129,31 @@ $(document)
             url: "modules/products/controller/controller_products.class.php?delete=true",
             data: "filename=" + name,
             success: function(data) {
-              console.log(data);
+              $("#progress").hide();
+              $('.msg').text('').removeClass('msg_ok');
+              $('.msg').text('').removeClass('msg_error');
+              $("#e_avatar").html("");
 
+              var json = JSON.parse(data);
+              if (json.res === true) {
+                var element;
+                if ((element = file.previewElement) != null) {
+                  element.parentNode.removeChild(file.previewElement);
+
+                } else {
+                  false;
+                }
+              } else { // json.res == false, elimino la imagen también
+                var element;
+                if ((element = file.previewElement) != null) {
+                  element.parentNode.removeChild(file.previewElement);
+                } else {
+                  false;
+                }
+              }
             }
           });
         }
-
       });
   });
 
@@ -114,28 +183,43 @@ function validate_products() {
     var data = {
       "serial_number": serial_number
     };
-    // console.log(data);
+
     var data_products_JSON = JSON.stringify(data);
-    // console.log(data_products_JSON);
+
     $.post('modules/products/controller/controller_products.class.php', {
           alta_products_json: data_products_JSON
         },
 
         function(response) {
+          console.log(response);
           if (response.success) {
             window.location.href = response.redirect;
           }
-          console.log(response);
 
         },
         "json")
       .fail(function(xhr) {
-        // console.log("he entrado en fallo");
+        console.log(xhr);
         if (xhr.responseJSON.error.serial_number)
           $("#serial_number")
           .focus()
           .after("<span  class='error1'>" +
             xhr.responseJSON.error.serial_number + "</span>");
+
+        // errores imagen
+        if (xhr.responseJSON.success1) {
+          if (xhr.responseJSON.img_avatar !==
+            "/php_products/media/default-avatar.png") {}
+        } else {
+          $("#progress").hide();
+          $('.msg').text('').removeClass('msg_ok');
+          $('.msg')
+            .text('Error Upload image!!')
+            .addClass('msg_error')
+            .animate({
+              'right': '300px'
+            }, 300);
+        }
       });
   }
 }
