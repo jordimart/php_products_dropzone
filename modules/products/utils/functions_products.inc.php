@@ -4,6 +4,7 @@
 /* Function return array of arrays of result(boleans),error(message),data(results of regular expresion) */
 
 function validate_products($value) {
+
     $error = array();
     $ok = true;
 
@@ -13,11 +14,11 @@ function validate_products($value) {
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/^[0-9a-zA-Z]{2,20}$/')
         ),
-        /*'date_entry' => array(
+        'date_entry' => array(
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d/')
         ),
-        'date_exit' => array(
+      /*  'date_exit' => array(
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d/')
         ),
@@ -52,22 +53,15 @@ function validate_products($value) {
     );
 
 
-    $result = filter_input_array($value, $filter);
+    $result = filter_var_array($value, $filter);
 
-    //error message for seral number
-    if ($result != null && $result) {
-
-        if (!$result['serial_number']) {
-            $error['serial_number'] = 'Serial number must be 2 to 20 characters,no admit special characters php';
-            $ok = false;
-        }
-
-      /*  //no filter
-        $result['category'] = $_POST['category'];
-        $result['trademark'] = $_POST['trademark'];
-        $result['model'] = $_POST['model'];
-        $result['status'] = $_POST['status'];
-        $result['warranty'] = $_POST['warranty'];
+    //Validaciones extra en php
+        //no filter
+        $result['category'] = $value['category'];
+        $result['trademark'] = $value['trademark'];
+        $result['model'] = $value['model'];
+      //  $result['status'] = $_POST['status'];
+      //  $result['warranty'] = $_POST['warranty'];
 
         if ($_POST['category'] === ' ') {
             $error['category'] = "You haven't select category";
@@ -94,7 +88,7 @@ function validate_products($value) {
             }
         }
 
-        //error message for date_exit
+      /*  //error message for date_exit
         if ($result['date_exit'] && $result['date_entry']) {
             //validate  date exit can not be earlier than the date entry
             $dates = compare_dates($_POST['date_entry'], $_POST['date_exit']);
@@ -110,9 +104,16 @@ function validate_products($value) {
           //exit;
             $error['warranty'] = "Select 2 or more.";
             $ok = false;
-        }
+        }*/
+        if ($result != null && $result) {
 
-        //error message for purchase price
+          //error message for serial number
+          if (!$result['serial_number']) {
+              $error['serial_number'] = 'Serial number must be 2 to 20 characters,no admit special characters php';
+              $ok = false;
+          }
+
+    /*    //error message for purchase price
         if (!$result['purchase_price']) {
             $error['purchase_price'] = 'The price format is wrong,example 000000.0000';
             $ok = false;
@@ -146,7 +147,7 @@ function validate_products($value) {
         if (!$result['description']) {
             $error['description'] = 'The description format is wrong,you can not use characters';
             $ok = false;
-        }
+        }*/
         if (!$result['date_entry']) {
             if ($_POST['date_entry'] == "") {
                 $error['date_entry'] = "The field is empty";
@@ -160,7 +161,7 @@ function validate_products($value) {
                 $ok = false;
             }
         }
-
+/*
         if (!$result['description']) {
             if ($_POST['description'] == "") {
                 $error['description'] = "The field is empty";
@@ -169,6 +170,8 @@ function validate_products($value) {
         }*/
     };
     return $return = array('result' => $ok, 'error' => $error, 'data' => $result);
+
+
 }
 
 // validate date entry

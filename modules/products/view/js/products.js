@@ -1,12 +1,3 @@
-/* Esta es la versión que debe quedar para poder comunicar entre cliente y
-servidor
-simplemente activamos la función en el cliente, este contacta con el controller
-php y si
-conecta nos responderá con un console el mensaje que metamos en json_encode*/
-/*Con esta prueba lo que logramos es entender el flujo de trabajo simplificado,
-ahora se
-introduciran validaciones y funciones de imagen*/
-
 Dropzone.autoDiscover = false;
 $(document)
   .ready(function() {
@@ -40,56 +31,6 @@ $(document)
     $("#submit_products").click(function() {
       validate_products();
     });
-
-    // Control de seguridad para evitar que al volver atrás de la
-    // pantalla results a create, no nos imprima los datos
-    /*$.get(
-      "modules/products/controller/controller_products.class.php?load_data=true",
-      // cogemos por get
-      function(response) {
-        console.log(response);
-      }, "json");*/
-
-    /*  // Dropzone function //////////////////////////////////
-      $("#dropzone")
-        .dropzone({
-          url:
-      "modules/products/controller/controller_products.class.php?upload=true",
-          addRemoveLinks: true,
-          maxFileSize: 1000,
-          dictResponseError: "Ha ocurrido un error en el server",
-          acceptedFiles:
-      'image/*,.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF,.rar,application/pdf,.psd',
-          init: function() {
-            this.on("success", function(file, response) {
-              console.log(response);
-
-            });
-          },
-          complete: function(file) {
-            // if(file.status == "success"){
-            // alert("El archivo se ha subido correctamente: " +
-            // file.name);
-            //}
-          },
-          error: function(file) {
-            // alert("Error subiendo el archivo " + file.name);
-          },
-          removedfile: function(file, serverFileName) {
-            var name = file.name;
-            $.ajax({
-              type: "POST",
-              url:
-      "modules/products/controller/controller_products.class.php?delete=true",
-              data: "filename=" + name,
-              success: function(data) {
-                console.log(data);
-
-              }
-            });
-          }
-
-        });*/
 
     // Dropzone function //////////////////////////////////
     $("#dropzone")
@@ -160,8 +101,17 @@ $(document)
 function validate_products() {
   var result = true;
   var serial_number = document.getElementById('serial_number').value;
+  var category = document.getElementById('category').value;
+  var trademark = document.getElementById('trademark').value;
+  var model = document.getElementById('model').value;
+  var date_entry = document.getElementById('date_entry').value;
 
   var string_reg = /^[A-Za-z0-9- -.]{2,20}$/;
+  var date_reg =
+    /^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/;
+  var price_reg = /^[1-9]\d{1,7}(?:\.\d{1,4})?$/;
+  var measure_reg = /^[0-9]\d{1,4}?$/;
+  var desc_reg = /^[A-Za-z0-9- -.]{2,80}$/;
 
   $(".error").remove();
   if ($("#serial_number").val() == "" ||
@@ -178,10 +128,29 @@ function validate_products() {
     result = false;
     return false;
   }
+  $(".error").remove();
+  if ($("#date_entry").val() == "" ||
+    $("#date_entry").val() == "Entry date entry") {
+    $("#date_entry")
+      .focus()
+      .after("<span class='error'>Entry date entry</span>");
+    result = false;
+    return false;
+  } else if (!date_reg.test($("#date_entry").val())) {
+    $("#date_entry")
+      .focus()
+      .after("<span class='error'>error format date (dd-mm-yyyy) js</span>");
+    result = false;
+    return false;
+  }
 
   if (result) {
     var data = {
-      "serial_number": serial_number
+      "serial_number": serial_number,
+      "category": category,
+      "trademark": trademark,
+      "model": model,
+      "date_entry": date_entry
     };
 
     var data_products_JSON = JSON.stringify(data);
@@ -192,6 +161,8 @@ function validate_products() {
 
         function(response) {
           console.log(response);
+          console.log(response.products);
+
           if (response.success) {
             window.location.href = response.redirect;
           }
@@ -205,6 +176,11 @@ function validate_products() {
           .focus()
           .after("<span  class='error1'>" +
             xhr.responseJSON.error.serial_number + "</span>");
+        if (xhr.responseJSON.error.date_entry)
+          $("#date_entry")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.date_entry + "</span>");
 
         // errores imagen
         if (xhr.responseJSON.success1) {

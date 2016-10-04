@@ -106,15 +106,15 @@ function upload_files() {
         if ($copiarFichero) {
             if (!move_uploaded_file($_FILES['file']['tmp_name'],$upfile)) {
                 $error .= "<p>Error al subir la imagen.</p>";
-                return $return=array('resultado'=>false,'error'=>$error,'datos'=>"");
+                return $return=array('result'=>false,'error'=>$error,'data'=>"");
             }
             //We need edit $upfile because now i don't need absolute route.
-            $upfile ='media/'.$nombreFichero;
-            return $return=array('resultado'=>true , 'error'=>$error,'datos'=>$upfile);
+            $upfile ='/php_products/media/'.$nombreFichero;
+            return $return=array('result'=>true , 'error'=>$error,'data'=>$upfile);
         }
         if($_FILES['file']['error'] !== 0) { //Assignarem a l'us default-avatar
-            $upfile = '/php_products/media/default-avatar.png';
-            return $return=array('resultado'=>true,'error'=>$error,'datos'=>$upfile);
+            $upfile = $_SERVER['DOCUMENT_ROOT'].'/php_products/media/default-avatar.png';
+            return $return=array('result'=>true,'error'=>$error,'data'=>$upfile);
         }
     }else{
         return $return=array('result'=>false,'error'=>$error,'data'=>"");

@@ -36,10 +36,22 @@ function paint_product(json) {
   var serial_number = document.createElement("div");
   serial_number.innerHTML = "serial_number = ";
   serial_number.innerHTML += json.product.serial_number;
+  var category = document.createElement("div");
+  category.innerHTML = "category = ";
+  category.innerHTML += json.product.category;
+  var trademark = document.createElement("div");
+  trademark.innerHTML = "trademark = ";
+  trademark.innerHTML += json.product.trademark;
+  var model = document.createElement("div");
+  model.innerHTML = "model = ";
+  model.innerHTML += json.product.model;
+  var date_entry = document.createElement("div");
+  date_entry.innerHTML = "date_entry = ";
+  date_entry.innerHTML += json.product.date_entry;
 
-  var cad = json.product.serial_number;
-  console.log(cad);
-  var cad = cad.toLowerCase();
+  var cad = json.product.avatar;
+  // console.log(cad);
+  // var cad = cad.toLowerCase();
   var img = document.createElement("div");
   var html = '<img src="' + cad + '" height="75" width="75"> ';
   img.innerHTML = html;
@@ -48,7 +60,10 @@ function paint_product(json) {
   div_product.appendChild(parrafo);
   parrafo.appendChild(msje);
   parrafo.appendChild(serial_number);
-
+  parrafo.appendChild(category);
+  parrafo.appendChild(trademark);
+  parrafo.appendChild(model);
+  parrafo.appendChild(date_entry);
   content.appendChild(div_product);
   content.appendChild(img);
 }

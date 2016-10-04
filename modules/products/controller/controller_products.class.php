@@ -13,18 +13,27 @@ if ((isset($_POST['alta_products_json']))) {
 	function alta_products() {
     $jsondata = array();
     $productsJSON = json_decode($_POST["alta_products_json"], true);
-    //console.log($productsJSON);
+
     $result = validate_products($productsJSON);
+
+
+
 //si no hay avatar pone laruta de default
     if (empty($_SESSION['result_avatar'])) {
-       $_SESSION['result_avatar'] = array('result' => true, 'error' => "", 'data' => 'media/default-avatar.png');
+       $_SESSION['result_avatar'] = array('result' => true, 'error' => "", 'data' => '/php_products/media/default-avatar.png');
    }
    //coge la url de la foto
    $result_avatar = $_SESSION['result_avatar'];
 
-    if (($result['result']) /*&& ($result_avatar['result'])*/) {
+    if ((!$result['result']) /*&& ($result_avatar['result'])*/) {
         $arrArgument = array(
             'serial_number' => ucfirst($result['data']['serial_number']),
+            'category' => ($result['data']['category']),
+            'trademark' => ($result['data']['trademark']),
+            'model' => ($result['data']['model']),
+            'date_entry' => ($result['data']['date_entry']),
+
+
             'avatar' => $result_avatar['data']
         );
 
@@ -64,6 +73,7 @@ if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
   $_SESSION['result_avatar'] = $result_avatar;
 }
 
+
 if (isset($_GET["delete"]) && $_GET["delete"] == true) {
   $_SESSION['result_avatar'] = array();
 $result = remove_files();
@@ -84,15 +94,13 @@ if (isset($_GET["load"]) && $_GET["load"] == true) {
 
    $jsondata = array();
     if (isset($_SESSION['product'])) {
-        //echo debug($_SESSION['user']);
           $jsondata["success"] = true;
         $jsondata["product"] = $_SESSION['product'];
     }
     if (isset($_SESSION['msje'])) {
-        //echo $_SESSION['msje'];
         $jsondata["msje"] = $_SESSION['msje'];
     }
-    //close_session();//ESTO ME DIO PROBLEMAS
+    //close_session();//ESTO ME DIO PROBLEMAS internal server error
     echo json_encode($jsondata);
     exit;
 }
