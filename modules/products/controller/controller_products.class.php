@@ -17,7 +17,6 @@ if ((isset($_POST['alta_products_json']))) {
     $result = validate_products($productsJSON);
 
 
-
 //si no hay avatar pone laruta de default
     if (empty($_SESSION['result_avatar'])) {
        $_SESSION['result_avatar'] = array('result' => true, 'error' => "", 'data' => '/php_products/media/default-avatar.png');
@@ -32,7 +31,16 @@ if ((isset($_POST['alta_products_json']))) {
             'trademark' => ($result['data']['trademark']),
             'model' => ($result['data']['model']),
             'date_entry' => ($result['data']['date_entry']),
-
+            'date_exit' => ($result['data']['date_exit']),
+            'purchase_price' => ($result['data']['purchase_price']),
+            'sale_price' => ($result['data']['sale_price']),
+            'provider' => ($result['data']['provider']),
+            'weight' => ($result['data']['weight']),
+            'height' => ($result['data']['height']),
+            'width' => ($result['data']['width']),
+            'description' => ($result['data']['description']),
+            'status' => ($result['data']['status']),
+            'warranty' => ($result['data']['warranty']),
 
             'avatar' => $result_avatar['data']
         );
@@ -61,10 +69,6 @@ if ((isset($_POST['alta_products_json']))) {
         //exit;
     }
 
-        //$jsondata["success"] = true;
-        //$jsondata["redirect1"] = "hola he comunicado con alta";
-        //echo json_encode($jsondata);
-        //exit;
 }
 
 if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
@@ -87,11 +91,6 @@ if ($result === true) {
 
 if (isset($_GET["load"]) && $_GET["load"] == true) {
 
-/*  $jsondata["success"] = true;
-  $jsondata["redirect4"] = "hola he comunicado con load";
-  echo json_encode($jsondata);
-    exit;*/
-
    $jsondata = array();
     if (isset($_SESSION['product'])) {
           $jsondata["success"] = true;
@@ -100,16 +99,23 @@ if (isset($_GET["load"]) && $_GET["load"] == true) {
     if (isset($_SESSION['msje'])) {
         $jsondata["msje"] = $_SESSION['msje'];
     }
-    //close_session();//ESTO ME DIO PROBLEMAS internal server error
+    close_session();//ESTO ME DIO PROBLEMAS internal server error
     echo json_encode($jsondata);
     exit;
 }
 
-/*if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
+function close_session() {
+    unset($_SESSION['product']);
+    unset($_SESSION['msje']);
+    $_SESSION = array(); // Destruye todas las variables de la sesión
+    session_destroy(); // Destruye la sesión
+}
+
+if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
 
   $jsondata["success"] = true;
   $jsondata["redirect5"] = "hola he comunicado con load_data";
   echo json_encode($jsondata);
 
     exit;
-}*/
+}

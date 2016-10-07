@@ -8,6 +8,7 @@
         <div >
             <div class="status alert alert-success" style="display: none"></div>
             <div id="content"></div>
+            <br><br>
             <script type="text/javascript" src="modules/products/view/js/list_products.js" ></script>
 
         </div><!--/.row-->
