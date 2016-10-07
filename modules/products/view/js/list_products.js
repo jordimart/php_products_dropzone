@@ -77,15 +77,12 @@ function paint_product(json) {
   status.innerHTML += json.product.status;
   var warranty = document.createElement("div");
   warranty.innerHTML = "warranty = ";
-  warranty.innerHTML += json.product.v;
+  warranty.innerHTML += json.product.warranty;
 
   var cad = json.product.avatar;
-  // console.log(cad);
-  // var cad = cad.toLowerCase();
   var img = document.createElement("div");
   var html = '<img src="' + cad + '" height="75" width="75"> ';
   img.innerHTML = html;
-  // alert(html);
 
   div_product.appendChild(parrafo);
   parrafo.appendChild(msje);

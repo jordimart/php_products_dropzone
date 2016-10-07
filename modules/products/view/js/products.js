@@ -169,12 +169,13 @@ $(document)
     $(function() {
       $('#date_entry')
         .datepicker({
-          dateFormat: 'dd-mm-yy',
+
           changeMonth: true,
           changeYear: true,
           defaultDate: 'today',
           maxDate: 'today',
           yearRange: '1900:2016',
+          dateFormat: 'dd-mm-yy',
 
         });
     });
@@ -183,10 +184,11 @@ $(document)
     $(function() {
       $('#date_exit')
         .datepicker({
-          dateFormat: 'dd-mm-yy',
+
           changeMonth: true,
           changeYear: true,
           yearRange: '1900:2016',
+          dateFormat: 'dd-mm-yy',
 
         });
     });
@@ -210,7 +212,7 @@ $(document)
             .val('Sunways'); // ojo sedebe cambiar si filtramospor base de
           // datos
           $("#model")
-            .val('3000w/24v'); // ojo sedebe cambiar si filtramospor base
+            .val('NT6000'); // ojo sedebe cambiar si filtramospor base
           // de datos
           $("#date_entry").val('');
           $("#date_exit").val('');
@@ -221,20 +223,20 @@ $(document)
           $("#height").val('');
           $("#width").val('');
           $("#description").val('');
-          $("#status").val('');
+
           var inputElements_radio =
-            document.getElementsByClassName('radio');
+            document.getElementsByClassName('status');
           for (var i = 0; i < inputElements_radio.length; i++) {
-            if (inputElements[i].checked) {
-              inputElements[i].checked = false;
+            if (inputElements_radio[i].checked) {
+              inputElements_radio[i].checked = false;
             }
           }
 
           var inputElements_check =
-            document.getElementsByClassName('checkbox');
+            document.getElementsByClassName('warranty');
           for (var i = 0; i < inputElements_check.length; i++) {
-            if (inputElements[i].checked) {
-              inputElements[i].checked = false;
+            if (inputElements_check[i].checked) {
+              inputElements_check[i].checked = false;
             }
           }
 
@@ -258,7 +260,7 @@ $(document)
 
           var status = response.product.status;
           var inputElements_radio =
-            document.getElementsByClassName('radio_');
+            document.getElementsByClassName('status');
           for (var i = 0; i < status.length; i++) {
             for (var j = 0; j < inputElements_radio_.length; j++) {
               if (status[i] === inputElements_radio_[j])
@@ -268,11 +270,11 @@ $(document)
 
           var warranty = response.product.warranty;
           var inputElements_check =
-            document.getElementsByClassName('checkbox_');
+            document.getElementsByClassName('warranty');
           for (var i = 0; i < warranty.length; i++) {
-            for (var j = 0; j < inputElements.length; j++) {
-              if (warranty[i] === inputElements[j])
-                inputElements[j].checked = true;
+            for (var j = 0; j < inputElements_check.length; j++) {
+              if (warranty[i] === inputElements_check[j])
+                inputElements_check[j].checked = true;
             }
           }
         }
@@ -405,20 +407,19 @@ function validate_products() {
   var height = document.getElementById('height').value;
   var width = document.getElementById('width').value;
   var description = document.getElementById('description').value;
-  var status = document.getElementById('status').value;
 
-  /*var status = [];
-  var inputElements_radio = document.getElementsByClassName('radio');
+  var status = [];
+  var inputElements_radio = document.getElementsByClassName('status');
   var p = 0;
   for (var i = 0; i < inputElements_radio.length; i++) {
     if (inputElements_radio[i].checked) {
       status[p] = inputElements_radio[i].value;
       j++;
     }
-  }*/
+  }
 
   var warranty = [];
-  var inputElements_check = document.getElementsByClassName('checkbox_');
+  var inputElements_check = document.getElementsByClassName('warranty');
   var j = 0;
   for (var i = 0; i < inputElements_check.length; i++) {
     if (inputElements_check[i].checked) {
@@ -436,10 +437,10 @@ function validate_products() {
 
   $(".error").remove();
   if ($("#serial_number").val() == "" ||
-    $("#serial_number").val() == "Entry serial number") {
+    $("#serial_number").val() == "Entry serial number js") {
     $("#serial_number")
       .focus()
-      .after("<span class='error'>Entry serial number</span>");
+      .after("<span class='error'>Entry serial number js</span>");
     result = false;
     return false;
   } else if (!string_reg.test($("#serial_number").val())) {
@@ -451,10 +452,10 @@ function validate_products() {
   }
   $(".error").remove();
   if ($("#date_entry").val() == "" ||
-    $("#date_entry").val() == "Entry date entry") {
+    $("#date_entry").val() == "Entry date entry js") {
     $("#date_entry")
       .focus()
-      .after("<span class='error'>Entry date entry</span>");
+      .after("<span class='error'>Entry date entry js</span>");
     result = false;
     return false;
   } else if (!date_reg.test($("#date_entry").val())) {
@@ -468,27 +469,29 @@ function validate_products() {
   $(".error").remove();
   if ($("#date_exit").val() == "" ||
     $("#date_exit").val() == "Entry date of birth") {
-    $("#date_exit").focus().after("<span class='error'>Input date exit</span>");
+    $("#date_exit")
+      .focus()
+      .after("<span class='error'>Input date exit js</span>");
     result = false;
     return false;
   } else if (!date_reg.test($("#date_exit").val())) {
     $("#date_exit")
       .focus()
-      .after("<span class='error'>error format date (dd-mm-yyyy)</span>");
+      .after("<span class='error'>error format date (dd-mm-yyyy) js</span>");
     result = false;
     return false;
   } else if ($("#purchase_price").val() == "" ||
-    $("#purchase_price").val() == "Input purchase price") {
+    $("#purchase_price").val() == "Input purchase price js") {
     $("#purchase_price")
       .focus()
-      .after("<span class='error'>Input purchase price</span>");
+      .after("<span class='error'>Input purchase price js</span>");
     result = false;
     return false;
   } else if (!price_reg.test($("#purchase_price").val())) {
     $("#purchase_price")
       .focus()
       .after(
-        "<span class='error'>The price format is wrong,example 000000.0000</span>"
+        "<span class='error'>The price format is wrong,example 000000.0000 js</span>"
       );
     result = false;
     return false;
@@ -498,87 +501,90 @@ function validate_products() {
     $("#sale_price").val() == "Input sale price") {
     $("#sale_price")
       .focus()
-      .after("<span class='error'>Input sale price</span>");
+      .after("<span class='error'>Input sale price js</span>");
     result = false;
     return false;
   } else if (!price_reg.test($("#sale_price").val())) {
     $("#sale_price")
       .focus()
       .after(
-        "<span class='error'>The price format is wrong,example 000000.0000</span>"
+        "<span class='error'>The price format is wrong,example 000000.0000 js</span>"
       );
     result = false;
     return false;
   }
 
-  if ($("#provider").val() == "" || $("#provider").val() == "Input provider") {
-    $("#provider").focus().after("<span class='error'>Input provider</span>");
+  if ($("#provider").val() == "" ||
+    $("#provider").val() == "Input provider js") {
+    $("#provider")
+      .focus()
+      .after("<span class='error'>Input provider js</span>");
     result = false;
     return false;
   } else if (!string_reg.test($("#provider").val())) {
     $("#provider")
       .focus()
       .after(
-        "<span class='error'>Provider must be 2 to 20 characters,no admit special characters</span>"
+        "<span class='error'>Provider must be 2 to 20 characters,no admit special characters js</span>"
       );
     result = false;
     return false;
   }
 
-  if ($("#weight").val() == "" || $("#weight").val() == "Input weight") {
-    $("#weight").focus().after("<span class='error'>Input weight</span>");
+  if ($("#weight").val() == "" || $("#weight").val() == "Input weight js") {
+    $("#weight").focus().after("<span class='error'>Input weight js</span>");
     result = false;
     return false;
   } else if (!measure_reg.test($("#weight").val())) {
     $("#weight")
       .focus()
       .after(
-        "<span class='error'>The weight format is wrong,you can not use more than 4 digits</span>"
+        "<span class='error'>The weight format is wrong,you can not use more than 4 digits js</span>"
       );
     result = false;
     return false;
   }
 
-  if ($("#height").val() == "" || $("#height").val() == "Input height") {
-    $("#height").focus().after("<span class='error'>Input height</span>");
+  if ($("#height").val() == "" || $("#height").val() == "Input height js") {
+    $("#height").focus().after("<span class='error'>Input height js</span>");
     result = false;
     return false;
   } else if (!measure_reg.test($("#height").val())) {
     $("#height")
       .focus()
       .after(
-        "<span class='error'>The height format is wrong,you can not use more than 4 digits</span>"
+        "<span class='error'>The height format is wrong,you can not use more than 4 digits js</span>"
       );
     result = false;
     return false;
   }
 
-  if ($("#width").val() == "" || $("#width").val() == "Input width") {
-    $("#width").focus().after("<span class='error'>Input width</span>");
+  if ($("#width").val() == "" || $("#width").val() == "Input width js") {
+    $("#width").focus().after("<span class='error'>Input width js</span>");
     result = false;
     return false;
   } else if (!measure_reg.test($("#width").val())) {
     $("#width")
       .focus()
       .after(
-        "<span class='error'>The width format is wrong,you can not use more than 4 digits.</span>"
+        "<span class='error'>The width format is wrong,you can not use more than 4 digits js</span>"
       );
     result = false;
     return false;
   }
 
   if ($("#description").val() == "" ||
-    $("#description").val() == "Input description") {
+    $("#description").val() == "Input description js") {
     $("#description")
       .focus()
-      .after("<span class='error'>Input description</span>");
+      .after("<span class='error'>Input description js</span>");
     result = false;
     return false;
   } else if (!desc_reg.test($("#description").val())) {
     $("#description")
       .focus()
       .after(
-        "<span class='error'>The description format is wrong,you can not use spaecial characters.</span>"
+        "<span class='error'>The description format is wrong,you can not use spaecial characters js</span>"
       );
     result = false;
     return false;
@@ -632,6 +638,57 @@ function validate_products() {
           .focus()
           .after("<span  class='error1'>" +
             xhr.responseJSON.error.date_entry + "</span>");
+        if (xhr.responseJSON.error.date_exit)
+          $("#date_exit")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.date_exit + "</span>");
+        if (xhr.responseJSON.error.purchase_price)
+          $("#purchase_price")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.purchase_price + "</span>");
+        if (xhr.responseJSON.error.sale_price)
+          $("#sale_price")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.sale_price + "</span>");
+        if (xhr.responseJSON.error.provider)
+          $("#provider")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.provider + "</span>");
+        if (xhr.responseJSON.error.date_entry)
+          $("#date_entry")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.date_entry + "</span>");
+        if (xhr.responseJSON.error.weight)
+          $("#weight")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.weight + "</span>");
+        if (xhr.responseJSON.error.height)
+          $("#height")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.height + "</span>");
+
+        if (xhr.responseJSON.error.width)
+          $("#width")
+          .focus()
+          .after("<span  class='error1'>" + xhr.responseJSON.error.width +
+            "</span>");
+        if (xhr.responseJSON.error.description)
+          $("#description")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.description + "</span>");
+        if (xhr.responseJSON.error.warranty)
+          $("#e_warranty")
+          .focus()
+          .after("<span  class='error1'>" +
+            xhr.responseJSON.error.warranty + "</span>");
 
         // errores imagen
         if (xhr.responseJSON.success1) {

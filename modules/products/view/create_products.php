@@ -112,19 +112,19 @@
                     <br>
                     <div class="radio">
                         <label for="Estado-0">
-                            <input type="radio" name="status" id="status-1" value="New" >
+                            <input type="radio" class="status" name="status" id="status-1" value="New" >
                             New
                         </label>
                     </div>
                     <div class="radio">
                         <label for="Estado-1">
-                            <input type="radio" name="status" id="status-2" value="Second hand" >
+                            <input type="radio"class="status" name="status" id="status-2" value="Second hand" >
                             Second hand
                         </label>
                     </div>
                     <div class="radio">
                         <label for="Estado-2">
-                            <input type="radio" name="status" id="status-3" value="Repaired" >
+                            <input type="radio" class="status" name="status" id="status-3" value="Repaired" >
                             Repaired
                         </label>
 
@@ -136,31 +136,31 @@
                     <br>
                     <div class="checkbox">
                         <label for="Garantia-0">
-                          <input type="checkbox" name="warranty[]"  value="Any" />
+                          <input type="checkbox" class="warranty" name="warranty[]"  value="Any" />
                               Any
                         </label>
                     </div>
                     <div class="checkbox">
                         <label for="Garantia-1">
-                            <input type="checkbox" name="warranty[]"  value="6 months">
+                            <input type="checkbox" class="warranty" name="warranty[]"  value="6 months">
                             6 months
                         </label>
                     </div>
                     <div class="checkbox">
                         <label for="Garantia-2">
-                            <input type="checkbox" name="warranty[]"  value="1 year">
+                            <input type="checkbox" class="warranty" name="warranty[]"  value="1 year">
                             1 year
                         </label>
                     </div>
                     <div class="checkbox">
                         <label for="Garantia-3">
-                            <input type="checkbox" name="warranty[]"  value="5 years">
+                            <input type="checkbox" class="warranty" name="warranty[]"  value="5 years">
                             5 years
                         </label>
                     </div>
                     <div class="checkbox">
                         <label for="Garantia-4">
-                            <input type="checkbox" name="warranty[]"  value="8 years">
+                            <input type="checkbox" class="warranty" name="warranty[]"  value="8 years">
                             8 years
                         </label>
                     </div>

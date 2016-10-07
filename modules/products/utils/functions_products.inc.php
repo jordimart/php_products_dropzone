@@ -60,21 +60,23 @@ function validate_products($value) {
         $result['category'] = $value['category'];
         $result['trademark'] = $value['trademark'];
         $result['model'] = $value['model'];
-        $result['status'] = $_POST['status'];
-        $result['warranty'] = $_POST['warranty'];
+        $result['status'] = $value['status'];
+        $result['warranty'] = $value['warranty'];
 
-        if ($_POST['category'] === ' ') {
+      /*  if ($_POST['category'] === ' ') {
             $error['category'] = "You haven't select category";
             $ok = false;
-        }
+        }*/ ///este campo nuca se validará sera el inicio de la consulta
 
+        //Este campo puede estar vacio si se realiza mal la consulta
         if ($_POST['trademark'] === ' ') {
-            $error['trademark'] = "You haven't select trademark";
+            $error['trademark'] = "You haven't select trademark ";
             $ok = false;
         }
 
+        //Este campo puede estar vacio si se realiza mal la consulta
         if ($_POST['model'] === ' ') {
-            $error['model'] = "You haven't select model";
+            $error['model'] = "You haven't select model ";
             $ok = false;
         }
 
@@ -99,73 +101,74 @@ function validate_products($value) {
         }
 
 
-        if (count($_POST['warranty']) <= 1) {
+        if (count($result['warranty']) <= 1) {
             $error['warranty'] = "Select 2 or more.";
             $ok = false;
         }
+
         if ($result != null && $result) {
 
-          //error message for serial number
-          if (!$result['serial_number']) {
-              $error['serial_number'] = 'Serial number must be 2 to 20 characters,no admit special characters php';
-              $ok = false;
-          }
+                //error message for serial number
+                if (!$result['serial_number']) {
+                    $error['serial_number'] = 'Serial number must be 2 to 20 characters,no admit special characters php';
+                    $ok = false;
+                }
 
-        //error message for purchase price
-        if (!$result['purchase_price']) {
-            $error['purchase_price'] = 'The price format is wrong,example 000000.0000';
-            $ok = false;
-        }
-        //error message for purchase price
-        if (!$result['sale_price']) {
-            $error['sale_price'] = 'The price format is wrong,example 0000000.0000';
-            $ok = false;
-        }
-        //error message for provider
-        if (!$result['provider']) {
-            $error['provider'] = 'The provider format is wrong,you can not use characters';
-            $ok = false;
-        }
-        //error message for weight
-        if (!$result['weight']) {
-            $error['weight'] = 'The weight format is wrong,you can not use more than 4 digits';
-            $ok = false;
-        }
-        //error message for height
-        if (!$result['height']) {
-            $error['height'] = 'The height format is wrong,you can not use more than 4 digits';
-            $ok = false;
-        }
-        //error message for width
-        if (!$result['width']) {
-            $error['width'] = 'The width format is wrong,you can not use more than 4 digits';
-            $ok = false;
-        }
-        //error message for textarea
-        if (!$result['description']) {
-            $error['description'] = 'The description format is wrong,you can not use characters';
-            $ok = false;
-        }
-        if (!$result['date_entry']) {
-            if ($_POST['date_entry'] == "") {
-                $error['date_entry'] = "The field is empty";
-                $ok = false;
-            }
-        }
+              //error message for purchase price
+              if (!$result['purchase_price']) {
+                  $error['purchase_price'] = 'The price format is wrong,example 000000.0000';
+                  $ok = false;
+              }
+              //error message for purchase price
+              if (!$result['sale_price']) {
+                  $error['sale_price'] = 'The price format is wrong,example 0000000.0000';
+                  $ok = false;
+              }
+              //error message for provider
+              if (!$result['provider']) {
+                  $error['provider'] = 'The provider format is wrong,you can not use characters';
+                  $ok = false;
+              }
+              //error message for weight
+              if (!$result['weight']) {
+                  $error['weight'] = 'The weight format is wrong,you can not use more than 4 digits';
+                  $ok = false;
+              }
+              //error message for height
+              if (!$result['height']) {
+                  $error['height'] = 'The height format is wrong,you can not use more than 4 digits';
+                  $ok = false;
+              }
+              //error message for width
+              if (!$result['width']) {
+                  $error['width'] = 'The width format is wrong,you can not use more than 4 digits';
+                  $ok = false;
+              }
+              //error message for textarea
+              if (!$result['description']) {
+                  $error['description'] = 'The description format is wrong,you can not use characters';
+                  $ok = false;
+              }
+              if (!$result['date_entry']) {
+                  if ($_POST['date_entry'] == "") {
+                      $error['date_entry'] = "The field is empty";
+                      $ok = false;
+                  }
+              }
 
-        if (!$result['date_exit']) {
-            if ($_POST['date_exit'] == "") {
-                $error['date_exit'] = "The field is empty";
-                $ok = false;
-            }
-        }
+              if (!$result['date_exit']) {
+                  if ($_POST['date_exit'] == "") {
+                      $error['date_exit'] = "The field is empty";
+                      $ok = false;
+                  }
+              }
 
-        if (!$result['description']) {
-            if ($_POST['description'] == "") {
-                $error['description'] = "The field is empty";
-                $ok = false;
-            }
-        }
+              if (!$result['description']) {
+                  if ($_POST['description'] == "") {
+                      $error['description'] = "The field is empty";
+                      $ok = false;
+                  }
+              }
     };
     return $return = array('result' => $ok, 'error' => $error, 'data' => $result);
 
