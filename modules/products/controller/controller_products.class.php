@@ -1,7 +1,7 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . "/php_products/modules/products/utils/functions_products.inc.php");
-include ($_SERVER['DOCUMENT_ROOT'] . "/php_products/utils/upload.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/modules/products/utils/functions_products.inc.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/utils/upload.php");
 session_start();
 
 if ((isset($_POST['alta_products_json']))) {
